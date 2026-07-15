@@ -40,22 +40,14 @@ export default function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-black/65 backdrop-blur-xl">
       <div className="mx-auto flex h-[4.5rem] w-full max-w-[1480px] items-center gap-6 px-5 md:px-8 lg:px-12">
-        {/* Logo Vipple */}
-        <Link href="/visao-geral" className="flex shrink-0 items-end gap-[3px]">
+        {/* Logo Vipple Agents */}
+        <Link href="/visao-geral" className="flex shrink-0 items-center">
           <img
-            src="/vipple-logo.png"
-            alt="Vipple"
-            className="h-8 w-auto translate-y-[2px]"
-            style={{ filter: "drop-shadow(0 0 14px rgba(255,23,23,0.5))" }}
+            src="/vipple-agents-logo.png"
+            alt="Vipple Agents"
+            className="h-9 w-auto"
+            style={{ filter: "drop-shadow(0 0 16px rgba(255,23,23,0.35))" }}
           />
-          <span className="flex flex-col leading-none">
-            <span className="display text-[1.55rem] font-medium lowercase tracking-tight text-white">
-              ipple
-            </span>
-            <span className="self-end text-[0.42rem] font-medium uppercase tracking-[0.5em] text-ink-mute">
-              digital
-            </span>
-          </span>
         </Link>
 
         <span className="hidden h-7 w-px bg-white/10 md:block" />
