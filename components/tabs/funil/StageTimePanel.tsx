@@ -5,7 +5,7 @@ import { STAGE_TIME, TOTALS } from "@/lib/data";
 import { fmtDur } from "@/lib/format";
 
 /* ══════════════════════════════════════════════════════════════
-   Tempo por etapa — a velocidade da Via, do "oi" ao handoff.
+   Tempo por etapa — a velocidade da Vitória, do "oi" ao handoff.
    Barras proporcionais ao tempo (max = Qualificação, 252s).
    ══════════════════════════════════════════════════════════════ */
 
@@ -20,7 +20,7 @@ export default function StageTimePanel({
     <Panel className={`flex flex-col gap-7 p-6 md:p-8 ${className}`}>
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="kicker mb-2">Velocidade da Via</p>
+          <p className="kicker mb-2">Velocidade da Vitória</p>
           <h3 className="display text-xl text-white md:text-[1.4rem]">
             Tempo por <span className="text-vred">etapa</span>
           </h3>

@@ -105,7 +105,7 @@ export default function StepConversionChart({
         <span className="num font-medium text-ink-dim">
           {fmtPct(DATA[4].taxa)}
         </span>{" "}
-        (fechamento) são decisões — o filtro da Via e a negociação do time. A
+        (fechamento) são decisões — o filtro da Vitória e a negociação do time. A
         entrega ao vendedor quase não perde ninguém:{" "}
         <span className="num font-medium text-ink-dim">
           {fmtPct(DATA[3].taxa)}

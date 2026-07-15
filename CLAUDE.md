@@ -19,7 +19,7 @@ O projeto vive em `/Users/gabrielhenriquenalli/Projects/VIPLLE /DASHBOARD VIPLLE
 - ✅ O cérebro (WhatsApp + IA + qualificação + handoff) será feito **no backend via n8n** (decisão do usuário, firme).
 - ✅ Hoje o dashboard lê dados **mockados** de `lib/data.ts`. Esse arquivo é a "tomada" onde o backend real vai plugar depois.
 
-Cliente demo usado nos mocks: **Clínica Vitalle** (odontologia), agente batizado de **"Via"**. Números-chave derivados: 432 contatos, 104 qualificados, 101 entregues, 34 fechados, receita R$ 162.860, ROI ≈ 108×.
+Cliente demo usado nos mocks: **Clínica Vitalle** (odontologia), agente batizado de **"Vitória"**. Números-chave derivados: 432 contatos, 104 qualificados, 101 entregues, 34 fechados, receita R$ 162.860, ROI ≈ 108×.
 
 ---
 
@@ -54,9 +54,9 @@ lib/
 
 ### As 4 abas (o usuário removeu a de Vendas em jul/2026 — ver histórico)
 1. **/visao-geral** — impacto: hero + 5 KPIs + gráfico "Atendimento diário" (full width) + tabela Antes×Depois + "Qualificados por semana" (full width). ⚠️ Removidos: painel ROI (108×) e "Custo por lead qualificado".
-2. **/ao-vivo** — pulso da operação: strip de status, fila de leads quentes (HotQueue), **Conversa ao vivo** (LiveFeed = chat lead↔Via que "digita" e cicla, lê de `LIVE_CONVERSATIONS`), heatmap semanal. ⚠️ Removidos: painel "Alertas da operação".
+2. **/ao-vivo** — pulso da operação: strip de status, **Central de atendimentos** (master-detail: `LiveAttendance` = lista de cards clicáveis dos leads × `ConversationView` = conversa completa do lead selecionado, mostrada de uma vez, SEM digitação; lê de `LIVE_CONVERSATIONS`), heatmap semanal. ⚠️ Removidos: HotQueue (fila) e "Alertas da operação"; o antigo LiveFeed (streaming) foi substituído.
 3. **/funil** — funil vertical custom (6 estágios) + motivos de descarte + checklist de qualificação + tempo por etapa + conversão etapa a etapa.
-4. **/inteligencia** — inteligência de mercado: dores/objeções, origens, serviços, perfil do lead. ⚠️ Removidos: "Perguntas sem resposta", "Clima das conversas" (Sentiment) e "A Via está aprendendo" (Learning).
+4. **/inteligencia** — inteligência de mercado: dores/objeções, origens, serviços, perfil do lead. ⚠️ Removidos: "Perguntas sem resposta", "Clima das conversas" (Sentiment) e "A Vitória está aprendendo" (Learning).
 
 > **Removido: a aba /vendas** (Vendas & Handoff) — deletados `app/vendas/` e `components/tabs/vendas/`. Os dados `HANDOFFS`, `SELLERS`, `waLink` continuam em `lib/data.ts` (dead code proposital — modelam o handoff pro futuro Supabase/n8n). `LIVE_EVENTS` e `LIVE.alerts` também ficaram sem uso após a troca do LiveFeed.
 
@@ -95,7 +95,7 @@ lib/
    - Coerência: feed vs. aba Vendas (lead L-0431), SLA unificado, `WEEKLY_QUALIFIED` derivado de Q, taxa 33,7%, delta +136% e `74%`/`136` vindos de `TOTALS`.
    - a11y/mobile: nav com fade de scroll, `role`/`aria-label` nos gráficos, heatmap/funil acessíveis no touch, `Delta` com direção pra leitor de tela, hierarquia de headings (`SectionHeader as="h1"`).
 
-4. **Enxugamento pedido pelo usuário** (jul/2026): removidos painel ROI (108×) e "Custo por lead" da Visão Geral; removidos "Alertas da operação" (Ao Vivo) e os 3 painéis de baixo da Inteligência; **removida a aba inteira Vendas & Handoff**. E o **Feed ao vivo virou "Conversa ao vivo"** — um chat que mostra as mensagens reais do lead e da Via, mensagem a mensagem, com indicador de digitação (o usuário quis "acompanhar de fato" o atendimento). Tudo verificado no browser, build limpo.
+4. **Enxugamento pedido pelo usuário** (jul/2026): removidos painel ROI (108×) e "Custo por lead" da Visão Geral; removidos "Alertas da operação" (Ao Vivo) e os 3 painéis de baixo da Inteligência; **removida a aba inteira Vendas & Handoff**. E o **Feed ao vivo virou "Conversa ao vivo"** — um chat que mostra as mensagens reais do lead e da Vitória, mensagem a mensagem, com indicador de digitação (o usuário quis "acompanhar de fato" o atendimento). Tudo verificado no browser, build limpo.
 
 Estado atual: **dashboard enxuto e polido, rodando com dados mock.** Console limpo.
 

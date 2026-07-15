@@ -5,7 +5,7 @@ import { CLIENT, DISQUALIFY_REASONS, TOTALS } from "@/lib/data";
 import { fmtInt, fmtPct } from "@/lib/format";
 
 /* ══════════════════════════════════════════════════════════════
-   Por que a Via descartou 158 leads — o filtro, não a perda.
+   Por que a Vitória descartou 158 leads — o filtro, não a perda.
    3+ categorias → RankRow (barras horizontais rotuladas).
    ══════════════════════════════════════════════════════════════ */
 

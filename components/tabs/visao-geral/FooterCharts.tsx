@@ -22,7 +22,7 @@ import { Panel, SectionHeader } from "@/components/ui/kit";
 export default function FooterCharts() {
   return (
     <section>
-      {/* ── Qualificados por semana: antes × com a Via ─────────── */}
+      {/* ── Qualificados por semana: antes × com a Vitória ─────────── */}
       <Panel className="p-6 md:p-7">
         <SectionHeader
           kicker="Ritmo de qualificação"

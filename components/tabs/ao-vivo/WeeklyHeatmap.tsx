@@ -97,7 +97,7 @@ export default function WeeklyHeatmap() {
           <p className="max-w-xl text-[0.78rem] font-light leading-relaxed text-ink-dim">
             Pico nas noites de seg–qua, entre 19h e 22h —{" "}
             <span className="num font-medium text-white">{foraPct}</span> do
-            volume chega fora do horário comercial. A Via cobre{" "}
+            volume chega fora do horário comercial. A Vitória cobre{" "}
             <span className="num font-medium text-vred">100%</span>.
           </p>
         </div>

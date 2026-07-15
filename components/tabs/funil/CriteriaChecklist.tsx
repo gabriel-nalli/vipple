@@ -6,7 +6,7 @@ import { CRITERIA, TOTALS } from "@/lib/data";
 import { fmtInt, fmtPct } from "@/lib/format";
 
 /* ══════════════════════════════════════════════════════════════
-   Checklist de qualificação — os 5 critérios que a Via valida
+   Checklist de qualificação — os 5 critérios que a Vitória valida
    antes de entregar um lead ao time. Mostra o rigor do agente.
    ══════════════════════════════════════════════════════════════ */
 

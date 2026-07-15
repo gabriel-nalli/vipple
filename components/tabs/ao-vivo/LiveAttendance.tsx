@@ -102,7 +102,7 @@ export default function LiveAttendance() {
     <section className="space-y-6">
       <SectionHeader
         kicker="Central de atendimentos"
-        title="Acompanhe a Via"
+        title="Acompanhe a Vitória"
         accent="ao vivo"
         right={
           <span className="pill pill-ghost">

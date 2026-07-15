@@ -1,6 +1,6 @@
 /* ══════════════════════════════════════════════════════════════
    VIPPLE IA — DATASET DEMO (fonte única de verdade)
-   Cliente demo: Clínica Vitalle (Odontologia) · Agente: "Via"
+   Cliente demo: Clínica Vitalle (Odontologia) · Agente: "Vitória"
    Período: últimos 30 dias — 14/06 a 13/07/2026
    Totais SEMPRE derivados das séries (nunca duplicar números).
    ══════════════════════════════════════════════════════════════ */
@@ -8,8 +8,8 @@
 export const CLIENT = {
   name: "Clínica Vitalle",
   segment: "Odontologia",
-  agentName: "Via",
-  agentFull: "Via — Agente IA Vipple",
+  agentName: "Vitória",
+  agentFull: "Vitória — Agente IA Vipple",
   plan: "Vipple IA · Plano Anual",
   planMonthly: 1500,
   period: "Últimos 30 dias · 14 jun — 13 jul 2026",
@@ -80,7 +80,7 @@ export const TOTALS = (() => {
     custoPorQualificadoHumano: 44,
     escaladaPrecocePct: 3.2,
     csat: 4.7,
-    retencaoPosObjecaoPct: 74, // % dos leads que seguem após a Via contornar a objeção
+    retencaoPosObjecaoPct: 74, // % dos leads que seguem após a Vitória contornar a objeção
     ganhoVsManualPct: Math.round((qualificados / (11 * 4) - 1) * 100), // +136% vs. operação manual (11 qualificados/sem × 4 sem)
   };
 })();
@@ -94,7 +94,7 @@ export type FunnelStage = { key: string; label: string; value: number; desc: str
 
 export const FUNNEL: FunnelStage[] = [
   { key: "recebidos", label: "Contatos recebidos", value: TOTALS.contatos, desc: "Novas conversas iniciadas no WhatsApp" },
-  { key: "engajaram", label: "Engajaram", value: TOTALS.engajaram, desc: "Responderam e conversaram com a Via" },
+  { key: "engajaram", label: "Engajaram", value: TOTALS.engajaram, desc: "Responderam e conversaram com a Vitória" },
   { key: "identificados", label: "Identificados", value: TOTALS.identificados, desc: "Nome, interesse e contexto capturados" },
   { key: "qualificados", label: "Qualificados", value: TOTALS.qualificados, desc: "Passaram em todos os critérios" },
   { key: "entregues", label: "Entregues ao time", value: TOTALS.entregues, desc: "Handoff com resumo + link direto" },
@@ -193,7 +193,7 @@ export const MSGS_TREND = [
   { w: "Sem 4", msgs: 10.8 },
 ];
 
-/* Qualificados por semana: média manual anterior (11/sem) vs com a Via.
+/* Qualificados por semana: média manual anterior (11/sem) vs com a Vitória.
    comIA derivado da série Q em blocos de 7 dias; a última janela (Sem 4)
    absorve os 2 dias extras do período (dias 22–30 = 9 dias).
    Soma das 4 janelas = 104 = TOTALS.qualificados → [21, 22, 25, 36]. */
@@ -356,11 +356,11 @@ export const LIVE = {
 export const LIVE_EVENTS = [
   { type: "msg" as const, text: "Nova conversa iniciada — Camila F. via Meta Ads" },
   { type: "qualify" as const, text: "Beatriz Amaral qualificada — score 89 · implante unitário" },
-  { type: "msg" as const, text: "Via respondeu Otávio S. em 6s — dúvida sobre sedação" },
+  { type: "msg" as const, text: "Vitória respondeu Otávio S. em 6s — dúvida sobre sedação" },
   { type: "handoff" as const, text: "Handoff: Otávio Serra → Renan Alves (resumo + link enviados)" },
   { type: "msg" as const, text: "Lead Larissa P. enviou áudio — transcrito e processado" },
   { type: "identify" as const, text: "Identificado: Marcos T., 45, Vila Mariana — busca protocolo" },
-  { type: "msg" as const, text: "Via contornou objeção de preço com parcelamento em 12x" },
+  { type: "msg" as const, text: "Vitória contornou objeção de preço com parcelamento em 12x" },
   { type: "disqualify" as const, text: "Lead R.S. desqualificado — fora da região (Campinas)" },
   { type: "qualify" as const, text: "Marcos T. avançou na qualificação — 4 de 5 critérios ✓" },
   { type: "msg" as const, text: "Nova conversa iniciada — Pedro L. via Google Ads" },
@@ -368,11 +368,11 @@ export const LIVE_EVENTS = [
   { type: "win" as const, text: "Diego marcou L-0440 (Sofia R.) como GANHO — R$ 11.400 💰" },
 ];
 
-/* ── Atendimentos ao vivo (lead ↔ Via) ──────────────────────────
-   Cada card é um lead sendo atendido pela Via; clicar abre a
+/* ── Atendimentos ao vivo (lead ↔ Vitória) ──────────────────────────
+   Cada card é um lead sendo atendido pela Vitória; clicar abre a
    conversa. "em_andamento" = acontecendo agora; "qualificado" =
    já passou nos critérios e virou handoff. A UI transmite a
-   conversa mensagem a mensagem (a Via "digita"). */
+   conversa mensagem a mensagem (a Vitória "digita"). */
 
 export type ChatMsg = { from: "lead" | "via" | "system"; text: string };
 
@@ -396,11 +396,16 @@ export const LIVE_CONVERSATIONS: LiveConversation[] = [
     startedMin: 6,
     messages: [
       { from: "lead", text: "Oi! Queria saber sobre implante, quebrei um dente mordendo e ficou feio 😖" },
-      { from: "via", text: "Oi, Beatriz! Pode ficar tranquila, isso a gente resolve — e o resultado fica super natural 😊 Foi só um dente ou mais de um?" },
-      { from: "lead", text: "Só um, o de cima da frente" },
-      { from: "via", text: "Entendi. E aconteceu há quanto tempo?" },
-      { from: "lead", text: "Semana passada" },
-      { from: "via", text: "Certo. Você prefere resolver logo ou está vendo com calma as opções?" },
+      { from: "via", text: "Oi Beatriz, tudo bem?? 😊" },
+      { from: "via", text: "Nossa, imagino como você tá se sentindo viu" },
+      { from: "via", text: "mas pode ficar super tranquila que isso a gente resolve certinho, e o resultado fica bem natural, ninguém percebe 🙌" },
+      { from: "via", text: "me conta uma coisa: foi só esse dente ou tem mais algum te incomodando?" },
+      { from: "lead", text: "só um, o de cima da frente" },
+      { from: "via", text: "Aa entendi" },
+      { from: "via", text: "e faz quanto tempo que isso aconteceu?" },
+      { from: "lead", text: "semana passada" },
+      { from: "via", text: "Sei..." },
+      { from: "via", text: "e você tá querendo resolver logo ou ainda tá só dando uma pesquisada?" },
     ],
   },
   {
@@ -412,10 +417,16 @@ export const LIVE_CONVERSATIONS: LiveConversation[] = [
     startedMin: 11,
     messages: [
       { from: "lead", text: "Boa noite, vocês fazem aquele alinhador invisível? Tipo o Invisalign" },
-      { from: "via", text: "Boa noite, Ricardo! Fazemos sim 😊 É a opção mais discreta pra alinhar os dentes sem aparelho aparecendo. Você já usou aparelho antes ou seria a primeira vez?" },
-      { from: "lead", text: "Usei quando era mais novo, mas os dentes voltaram a entortar" },
-      { from: "via", text: "Ah, a famosa recidiva — bem comum quando não usa a contenção. O alinhador resolve isso muito bem. Você quer corrigir mais por estética ou também incomoda na mordida?" },
-      { from: "lead", text: "É mais estética mesmo, trabalho com atendimento ao público" },
+      { from: "via", text: "Boa noite Ricardo, tudo certo? 😊" },
+      { from: "via", text: "Fazemos sim!" },
+      { from: "via", text: "é a opção mais discreta que tem viu, dá pra ir alinhando os dentes sem ninguém ver aparelho nenhum" },
+      { from: "via", text: "me fala uma coisa, você já usou aparelho antes ou seria a primeira vez?" },
+      { from: "lead", text: "usei quando era mais novo, mas os dentes voltaram a entortar" },
+      { from: "via", text: "Aah, isso é super comum viu" },
+      { from: "via", text: "é a tal da recidiva, quando a gente para de usar a contenção os dentes tendem a voltar mesmo" },
+      { from: "via", text: "mas relaxa que com o alinhador a gente resolve isso tranquilo" },
+      { from: "via", text: "e me conta, você quer corrigir mais pela estética ou também tá te incomodando na mordida?" },
+      { from: "lead", text: "é mais estética mesmo, trabalho com atendimento ao público" },
     ],
   },
   {
@@ -427,7 +438,9 @@ export const LIVE_CONVERSATIONS: LiveConversation[] = [
     startedMin: 3,
     messages: [
       { from: "lead", text: "oii vi o antes e depois de vocês no insta 😍 quanto fica as lentes?" },
-      { from: "via", text: "Oii, Larissa! Que bom que curtiu 💛 O valor depende de quantos dentes e do seu caso — por isso a avaliação é tão importante pra passar um orçamento certinho. Você pensa em fazer quantos dentes, mais ou menos?" },
+      { from: "via", text: "Oieee Larissa, que bom que você curtiu 💛" },
+      { from: "via", text: "olha, o valor a gente consegue te passar certinho depois de entender o seu caso, porque muda bastante dependendo de quantos dentes e do que você tá querendo" },
+      { from: "via", text: "mas me conta, você tá pensando em fazer quantos dentes mais ou menos?" },
       { from: "lead", text: "os 6 de cima da frente" },
     ],
   },
@@ -440,16 +453,27 @@ export const LIVE_CONVERSATIONS: LiveConversation[] = [
     startedMin: 18,
     messages: [
       { from: "lead", text: "Oi, vi o anúncio de vocês sobre implante. Ainda uso dentadura e queria uma coisa fixa." },
-      { from: "via", text: "Oi, Otávio! Que bom te ver por aqui 😊 O protocolo fixo é exatamente isso: devolve a mordida firme e a segurança de sorrir sem se preocupar. Posso te fazer 3 perguntinhas rápidas pra já adiantar seu atendimento?" },
-      { from: "lead", text: "Pode sim" },
-      { from: "via", text: "Show. Você já chegou a fazer alguma avaliação pra implante antes, ou seria a primeira vez?" },
-      { from: "lead", text: "Primeira vez, nunca fui atrás direito" },
-      { from: "via", text: "Entendi. E você quer resolver isso mais pra logo ou só está pesquisando por enquanto?" },
-      { from: "lead", text: "Pra logo, já tô incomodado faz tempo" },
-      { from: "via", text: "Faz total sentido. Última pergunta: o protocolo é um investimento maior que uma prótese comum, mas é definitivo. Você conseguiria investir a partir de uns R$ 12 mil pra resolver de vez?" },
-      { from: "lead", text: "Se for bem feito e parcelado, sim" },
-      { from: "via", text: "Perfeito! Pelo seu perfil, você é exatamente quem a gente consegue ajudar muito bem. Vou te passar agora pro Renan, nosso especialista em protocolo, com o resumo da nossa conversa — ele já te chama aqui pra fechar sua avaliação. Pode ser?" },
-      { from: "lead", text: "Pode sim, muito obrigado!" },
+      { from: "via", text: "Oi Otávio, tudo bem? 😊" },
+      { from: "via", text: "que bom que você chegou até a gente!" },
+      { from: "via", text: "olha, o protocolo fixo é exatamente o que você tá procurando, ele devolve a mordida firme e aquela segurança de sorrir sem ficar preocupado" },
+      { from: "via", text: "posso te fazer umas perguntinhas rápidas pra já ir adiantando seu atendimento?" },
+      { from: "lead", text: "pode sim" },
+      { from: "via", text: "Show!" },
+      { from: "via", text: "você já chegou a fazer alguma avaliação pra implante antes ou seria a primeira vez?" },
+      { from: "lead", text: "primeira vez, nunca fui atrás direito" },
+      { from: "via", text: "Entendi, sem problema nenhum" },
+      { from: "via", text: "e você tá querendo resolver isso logo ou ainda tá pesquisando com calma?" },
+      { from: "lead", text: "pra logo, já tô incomodado faz tempo" },
+      { from: "via", text: "Imagino viu, não é fácil conviver com isso todo dia" },
+      { from: "via", text: "deixa eu já ser bem transparente com você sobre o investimento" },
+      { from: "via", text: "o protocolo é um valor mais alto que uma prótese comum, mas é definitivo, é pra vida toda" },
+      { from: "via", text: "você conseguiria investir a partir de uns 12 mil pra resolver de vez?" },
+      { from: "lead", text: "se for bem feito e parcelado, sim" },
+      { from: "via", text: "Perfeito Otávio! 🙌" },
+      { from: "via", text: "pelo seu perfil você é exatamente quem a gente consegue ajudar muito bem" },
+      { from: "via", text: "vou te passar agora pro Renan, ele é nosso especialista em protocolo, já vou mandar pra ele o resumo da nossa conversa" },
+      { from: "via", text: "ele te chama aqui pra fechar sua avaliação, pode ser?" },
+      { from: "lead", text: "pode sim, muito obrigado!" },
       { from: "system", text: "Lead qualificado · handoff para Renan Alves" },
     ],
   },
@@ -462,22 +486,32 @@ export const LIVE_CONVERSATIONS: LiveConversation[] = [
     startedMin: 27,
     messages: [
       { from: "lead", text: "Boa tarde! Perdi um dente da frente e tô com vergonha de sorrir 😥 vocês fazem implante?" },
-      { from: "via", text: "Boa tarde, Mariana! Fazemos sim — e sei bem como isso incomoda. A gente resolve pra você recuperar seu sorriso com toda a naturalidade. Posso entender rapidinho seu caso pra te encaminhar certo?" },
-      { from: "lead", text: "Claro" },
-      { from: "via", text: "Foi há quanto tempo que você perdeu o dente?" },
-      { from: "lead", text: "Uns 2 meses, foi numa queda" },
-      { from: "via", text: "Entendi. E tem alguma data ou evento que te deixa mais com pressa de resolver?" },
-      { from: "lead", text: "Sim! O casamento da minha filha em setembro 🥹" },
-      { from: "via", text: "Que momento especial — vamos cuidar pra você estar com o sorriso lindo lá 💛 Sobre investimento: o implante unitário costuma ficar a partir de R$ 3 mil e dá pra parcelar. Isso cabe no que você planejou?" },
-      { from: "lead", text: "Cabe, ainda mais parcelado" },
-      { from: "via", text: "Maravilha, Mariana! Você tem o perfil certinho pra gente te atender muito bem. Vou te encaminhar agora pra Carla, nossa especialista, com todo o resumo — ela já te chama aqui pra marcar sua avaliação. Combinado?" },
-      { from: "lead", text: "Combinado, obrigada! 😊" },
+      { from: "via", text: "Oi Mariana, boa tarde! 😊" },
+      { from: "via", text: "Poxa, imagino o quanto isso te incomoda" },
+      { from: "via", text: "mas pode ficar tranquila que a gente resolve isso pra você, e fica tão natural que você volta a sorrir sem nem lembrar disso 💛" },
+      { from: "via", text: "posso entender rapidinho o seu caso pra te encaminhar certinho?" },
+      { from: "lead", text: "claro" },
+      { from: "via", text: "Foi há quanto tempo que você perdeu esse dente?" },
+      { from: "lead", text: "uns 2 meses, foi numa queda" },
+      { from: "via", text: "Ai, que susto né" },
+      { from: "via", text: "e me conta, tem alguma data ou evento chegando que te deixa mais na pressa de resolver?" },
+      { from: "lead", text: "sim! o casamento da minha filha em setembro 🥹" },
+      { from: "via", text: "Aah que lindo, que momento especial 🥹💛" },
+      { from: "via", text: "então vamos cuidar pra você tá com esse sorriso lindo no casamento" },
+      { from: "via", text: "sobre valor, o implante unitário começa a partir de uns 3 mil e dá pra parcelar tranquilo" },
+      { from: "via", text: "isso cabe no que você tinha pensado?" },
+      { from: "lead", text: "cabe, ainda mais parcelado" },
+      { from: "via", text: "Que ótimo Mariana! 🙌" },
+      { from: "via", text: "você tem o perfil certinho pra gente te atender super bem" },
+      { from: "via", text: "vou te encaminhar agora pra Carla, nossa especialista, e já mando pra ela todo o resumo da nossa conversa" },
+      { from: "via", text: "ela te chama aqui pra marcar sua avaliação, combinado?" },
+      { from: "lead", text: "combinado, obrigada! 😊" },
       { from: "system", text: "Lead qualificado · handoff para Carla Mendes" },
     ],
   },
 ];
 
-/* ── Critérios de qualificação (checklist da Via) ───────────── */
+/* ── Critérios de qualificação (checklist da Vitória) ───────────── */
 
 export const CRITERIA = [
   { label: "Identidade confirmada", desc: "Nome + contato validados", pct: 79 },

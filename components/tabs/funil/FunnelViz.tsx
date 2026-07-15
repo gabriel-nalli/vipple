@@ -126,7 +126,7 @@ function StepConnector({ pct, isFilter }: { pct: number; isFilter: boolean }) {
           {fmtPct(pct)}
         </span>
 
-        {/* Callout do maior degrau: o filtro da Via em ação */}
+        {/* Callout do maior degrau: o filtro da Vitória em ação */}
         {isFilter && (
           <div className="absolute right-0 top-1/2 hidden max-w-[32%] -translate-y-1/2 xl:block">
             <span className="inline-flex items-center rounded-full border border-vred/25 bg-vred/[0.07] px-3.5 py-1.5 text-[0.66rem] font-light leading-snug text-ink-dim">

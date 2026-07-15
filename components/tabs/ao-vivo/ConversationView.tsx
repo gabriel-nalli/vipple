@@ -7,7 +7,7 @@ import type { LiveConversation } from "@/lib/data";
 /* ══════════════════════════════════════════════════════════════
    CONVERSA DO LEAD SELECIONADO
    Mostra a conversa inteira de uma vez (mensagens do lead e da
-   Via). Sem animação de digitação — clicou no card, aparece tudo.
+   Vitória). Sem animação de digitação — clicou no card, aparece tudo.
    ══════════════════════════════════════════════════════════════ */
 
 function initials(name: string) {
@@ -49,45 +49,54 @@ export default function ConversationView({ conv }: { conv: LiveConversation }) {
         )}
       </div>
 
-      {/* trilha da conversa — completa */}
+      {/* trilha da conversa — completa, agrupada por remetente */}
       <div
-        className="flex-1 space-y-3 overflow-y-auto px-4 py-5"
-        aria-label={`Conversa entre ${conv.lead} e a Via`}
+        className="flex-1 overflow-y-auto px-4 py-5"
+        aria-label={`Conversa entre ${conv.lead} e a Vitória`}
       >
-        {conv.messages.map((m, i) =>
-          m.from === "system" ? (
-            <div key={i} className="flex justify-center py-1">
-              <span className="inline-flex items-center gap-2 rounded-full border border-money/30 bg-money/[0.12] px-3.5 py-1.5 text-[0.68rem] font-medium text-money">
-                <BadgeCheck size={13} aria-hidden />
-                {m.text}
-              </span>
-            </div>
-          ) : (
+        {conv.messages.map((m, i) => {
+          const prev = i > 0 ? conv.messages[i - 1] : null;
+          const grouped = !!prev && prev.from === m.from; // segue o mesmo remetente
+          const gap = i === 0 ? "" : grouped ? "mt-1" : "mt-4";
+
+          if (m.from === "system") {
+            return (
+              <div key={i} className={`flex justify-center py-1 ${i === 0 ? "" : "mt-4"}`}>
+                <span className="inline-flex items-center gap-2 rounded-full border border-money/30 bg-money/[0.12] px-3.5 py-1.5 text-[0.68rem] font-medium text-money">
+                  <BadgeCheck size={13} aria-hidden />
+                  {m.text}
+                </span>
+              </div>
+            );
+          }
+
+          const isVia = m.from === "via";
+          return (
             <div
               key={i}
-              className={`flex ${
-                m.from === "via" ? "justify-end" : "justify-start"
-              }`}
+              className={`flex ${gap} ${isVia ? "justify-end" : "justify-start"}`}
             >
               <div
                 className={`max-w-[82%] rounded-2xl px-3.5 py-2.5 text-[0.8rem] font-light leading-relaxed ${
-                  m.from === "via"
+                  isVia
                     ? "rounded-br-sm border border-vred/25 bg-vred/[0.13] text-white"
                     : "rounded-bl-sm bg-white/[0.06] text-ink"
-                }`}
+                } ${grouped ? (isVia ? "rounded-tr-sm" : "rounded-tl-sm") : ""}`}
               >
-                <span
-                  className={`mb-0.5 block text-[0.54rem] font-medium uppercase tracking-[0.16em] ${
-                    m.from === "via" ? "text-vred-soft" : "text-ink-mute"
-                  }`}
-                >
-                  {m.from === "via" ? "Via · IA" : conv.lead.split(" ")[0]}
-                </span>
+                {!grouped && (
+                  <span
+                    className={`mb-0.5 block text-[0.54rem] font-medium uppercase tracking-[0.16em] ${
+                      isVia ? "text-vred-soft" : "text-ink-mute"
+                    }`}
+                  >
+                    {isVia ? "Vitória · IA" : conv.lead.split(" ")[0]}
+                  </span>
+                )}
                 {m.text}
               </div>
             </div>
-          )
-        )}
+          );
+        })}
       </div>
 
       {/* rodapé */}
@@ -97,7 +106,7 @@ export default function ConversationView({ conv }: { conv: LiveConversation }) {
           aria-hidden
         />
         {ongoing
-          ? "Via conduzindo a qualificação · WhatsApp conectado"
+          ? "Vitória conduzindo a qualificação · WhatsApp conectado"
           : "Atendimento concluído · lead encaminhado ao vendedor"}
       </div>
     </Panel>
