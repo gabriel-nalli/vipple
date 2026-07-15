@@ -1,0 +1,222 @@
+@import "tailwindcss";
+
+/* ══════════════════════════════════════════════════════════════
+   VIPPLE — DESIGN TOKENS
+   Identidade: #FF1717 · #FFFFFF · #686868 · #1E1E1E · #000000
+   Tipografia: Neue Haas Grotesk (display) · Poppins (secundária)
+   ══════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* — Cores da marca — */
+  --color-vred: #ff1717;
+  --color-vred-soft: #ff5c47;
+  --color-vred-deep: #a31212;
+  --color-vred-dark: #4a0c0c;
+
+  /* — Neutros — */
+  --color-ink: #f5f5f5;
+  --color-ink-dim: #a3a3a3;
+  --color-ink-mute: #686868;
+  --color-surface: #050505;
+  --color-panel: #0d0d0d;
+  --color-panel-2: #131313;
+  --color-edge: #1e1e1e;
+
+  /* — Status (verde = dinheiro/positivo, como as pills do PDF) — */
+  --color-money: #2fbf71;
+  --color-warn: #ffb224;
+
+  /* — Fontes — */
+  --font-display: "Neue Haas Grotesk Display Pro", "Neue Haas Grotesk",
+    "Helvetica Neue", var(--font-archivo), Helvetica, Arial, sans-serif;
+  --font-body: var(--font-poppins), "Poppins", sans-serif;
+
+  /* — Sombras / brilhos — */
+  --shadow-glow-red: 0 0 24px rgba(255, 23, 23, 0.35),
+    0 0 80px rgba(255, 23, 23, 0.12);
+
+  /* — Animações — */
+  --animate-pulse-dot: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-ticker: ticker 1.4s ease-out both;
+
+  @keyframes pulse-dot {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(255, 23, 23, 0.55);
+    }
+    50% {
+      box-shadow: 0 0 0 7px rgba(255, 23, 23, 0);
+    }
+  }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes ticker {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* ── Base ───────────────────────────────────────────────────── */
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(255, 23, 23, 0.85);
+  color: #fff;
+}
+
+/* Scrollbar discreta */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a2a transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #242424;
+  border-radius: 99px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--color-vred-deep);
+}
+
+/* ── Componentes da identidade ─────────────────────────────── */
+
+/* Painel padrão — card escuro com borda sutil e brilho no hover */
+.panel {
+  position: relative;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: linear-gradient(160deg, #111111 0%, #0b0b0b 55%, #0d0d0d 100%);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease,
+    transform 0.35s ease;
+}
+.panel:hover {
+  border-color: rgba(255, 23, 23, 0.28);
+  box-shadow: 0 0 0 1px rgba(255, 23, 23, 0.08),
+    0 12px 48px -18px rgba(255, 23, 23, 0.25);
+}
+
+/* Kicker — rótulo em caixa alta super espaçada (padrão da apresentação) */
+.kicker {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--color-ink-mute);
+}
+
+/* Título display — Neue Haas com palavra de destaque em vermelho */
+.display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+}
+
+/* Números — sempre tabulares */
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Pill de valor (como as da apresentação: verde = retorno) */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  padding: 0.28rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.pill-money {
+  background: var(--color-money);
+  color: #04170c;
+}
+.pill-red {
+  background: var(--color-vred);
+  color: #fff;
+}
+.pill-ghost {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--color-ink-dim);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Linha de brilho no topo de um painel destacado */
+.panel-beam::before {
+  content: "";
+  position: absolute;
+  inset-inline: 15%;
+  top: -1px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 23, 23, 0.9),
+    transparent
+  );
+}
+
+/* Entrada escalonada — aplicar .reveal nos filhos de um .stagger */
+.stagger > .reveal {
+  animation: var(--animate-fade-up);
+}
+.stagger > .reveal:nth-child(1) { animation-delay: 0.05s; }
+.stagger > .reveal:nth-child(2) { animation-delay: 0.12s; }
+.stagger > .reveal:nth-child(3) { animation-delay: 0.19s; }
+.stagger > .reveal:nth-child(4) { animation-delay: 0.26s; }
+.stagger > .reveal:nth-child(5) { animation-delay: 0.33s; }
+.stagger > .reveal:nth-child(6) { animation-delay: 0.4s; }
+.stagger > .reveal:nth-child(7) { animation-delay: 0.47s; }
+.stagger > .reveal:nth-child(8) { animation-delay: 0.54s; }
+
+/* Esconde a scrollbar mantendo o scroll (nav mobile) */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
