@@ -1,20 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { BadgeCheck } from "lucide-react";
 import { LiveDot, Panel } from "@/components/ui/kit";
 import type { LiveConversation } from "@/lib/data";
 
 /* ══════════════════════════════════════════════════════════════
-   CONVERSA DO LEAD SELECIONADO — transmite mensagem a mensagem.
-   · A Via "digita" antes de responder.
-   · Montado com key={lead} no pai → trocar de card reinicia a
-     transmissão do zero, sem estado remanescente.
-   · Estado inicial determinístico (1ª msg visível) — sem hydration.
+   CONVERSA DO LEAD SELECIONADO
+   Mostra a conversa inteira de uma vez (mensagens do lead e da
+   Via). Sem animação de digitação — clicou no card, aparece tudo.
    ══════════════════════════════════════════════════════════════ */
-
-const TYPING_MS = 1300;
-const READ_MS = 1200;
 
 function initials(name: string) {
   return name
@@ -25,48 +19,7 @@ function initials(name: string) {
 }
 
 export default function ConversationView({ conv }: { conv: LiveConversation }) {
-  const msgs = conv.messages;
-  const [shown, setShown] = useState(1);
-  const [typing, setTyping] = useState(false);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const done = shown >= msgs.length;
   const ongoing = conv.status === "em_andamento";
-
-  useEffect(() => {
-    if (done) {
-      // em atendimento: a Via segue "digitando" (o lead ainda responde)
-      if (ongoing && msgs[msgs.length - 1]?.from === "lead") setTyping(true);
-      return;
-    }
-    const next = msgs[shown];
-    const viaTyping = next.from === "via";
-
-    if (viaTyping && !typing) {
-      timer.current = setTimeout(() => setTyping(true), READ_MS);
-      return () => {
-        if (timer.current) clearTimeout(timer.current);
-      };
-    }
-    timer.current = setTimeout(
-      () => {
-        setShown((n) => n + 1);
-        setTyping(false);
-      },
-      viaTyping ? TYPING_MS : READ_MS
-    );
-    return () => {
-      if (timer.current) clearTimeout(timer.current);
-    };
-  }, [shown, typing, done, ongoing, msgs]);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (el) el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
-  }, [shown, typing]);
-
-  const visible = msgs.slice(0, shown);
 
   return (
     <Panel className="flex h-full min-h-[540px] flex-col overflow-hidden">
@@ -96,16 +49,14 @@ export default function ConversationView({ conv }: { conv: LiveConversation }) {
         )}
       </div>
 
-      {/* trilha da conversa */}
+      {/* trilha da conversa — completa */}
       <div
-        ref={scrollRef}
         className="flex-1 space-y-3 overflow-y-auto px-4 py-5"
-        aria-live="polite"
         aria-label={`Conversa entre ${conv.lead} e a Via`}
       >
-        {visible.map((m, i) =>
+        {conv.messages.map((m, i) =>
           m.from === "system" ? (
-            <div key={i} className="flex animate-fade-up justify-center py-1">
+            <div key={i} className="flex justify-center py-1">
               <span className="inline-flex items-center gap-2 rounded-full border border-money/30 bg-money/[0.12] px-3.5 py-1.5 text-[0.68rem] font-medium text-money">
                 <BadgeCheck size={13} aria-hidden />
                 {m.text}
@@ -114,7 +65,7 @@ export default function ConversationView({ conv }: { conv: LiveConversation }) {
           ) : (
             <div
               key={i}
-              className={`flex animate-fade-up ${
+              className={`flex ${
                 m.from === "via" ? "justify-end" : "justify-start"
               }`}
             >
@@ -136,20 +87,6 @@ export default function ConversationView({ conv }: { conv: LiveConversation }) {
               </div>
             </div>
           )
-        )}
-
-        {typing && (
-          <div className="flex animate-fade-up justify-end">
-            <div className="flex items-center gap-1.5 rounded-2xl rounded-br-sm border border-vred/25 bg-vred/[0.1] px-3.5 py-3">
-              {[0, 1, 2].map((d) => (
-                <span
-                  key={d}
-                  className="h-1.5 w-1.5 animate-pulse rounded-full bg-vred-soft"
-                  style={{ animationDelay: `${d * 180}ms` }}
-                />
-              ))}
-            </div>
-          </div>
         )}
       </div>
 
